@@ -187,6 +187,33 @@ canvas{
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0,255,198,0.06);
 }
+#wishes p{
+  margin: 0.15rem 0;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+#wishes span{
+  display: inline-block;
+  padding: 0 0.03em;
+  transition: transform 0.1s ease-out, color 0.1s ease-out, text-shadow 0.1s ease-out;
+}
+#wishes span.jump{
+  color: var(--neon-2);
+  transform: translateY(-6px) scale(1.15);
+  text-shadow:
+    0 0 10px rgba(0,229,255,0.9),
+    0 0 18px rgba(0,255,198,0.8);
+}
+
+/* small pulse on the whole line while its notes are active (optional) */
+#wishes p:has(span.jump){
+  animation: lyricLinePulse 0.35s ease-out;
+}
+@keyframes lyricLinePulse{
+  from { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  to { transform: scale(1); }
+}
 
 /* ---------------------------
    CAROUSEL
