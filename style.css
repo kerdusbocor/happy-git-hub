@@ -1,0 +1,279 @@
+/* ---------------------------
+   THEME + RESET
+   --------------------------- */
+:root{
+  --neon:#00ffc6;
+  --neon-2:#00e5ff;
+  --bg-1:#050816;
+  --bg-2:#020617;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  position: relative; /* create stacking context above canvas */
+  font-family: "Raleway", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+  color:#e5f4ff;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:0; /* background layer for animation */
+  pointer-events:none;
+}
+
+/* ---------------------------
+   PRELOADER (GAME LOADING BAR)
+   --------------------------- */
+#preloader{
+  position:fixed; inset:0; z-index:3000;
+  display:flex; align-items:center; justify-content:center;
+  background:#000;
+}
+.loader-box{
+  width:min(520px,90vw);
+  text-align:center;
+  padding:28px;
+  border-radius:12px;
+  border:1px solid rgba(0,255,198,0.08);
+  background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(2,6,12,0.75));
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+.loader-title{
+  font-weight:700;
+  margin-bottom:12px;
+  color:var(--neon);
+  text-shadow:0 0 20px rgba(0,255,198,0.2);
+  letter-spacing:0.08em;
+}
+.loader-bar{
+  height:14px;
+  background:rgba(255,255,255,0.06);
+  border-radius:10px;
+  overflow:hidden;
+  margin:8px 0 10px;
+  border:1px solid rgba(0,255,198,0.06);
+}
+.loader-fill{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg, #ff2e63, #ff9f1c, #7c5cff, #00e5ff, #00ffc6);
+  background-size:200% 100%;
+  animation: loaderRainbow 1.6s linear infinite;
+  box-shadow: 0 0 18px rgba(0,255,198,0.25);
+}
+@keyframes loaderRainbow{
+  from{background-position:0%}
+  to{background-position:200%}
+}
+.loader-percent{color:#9fe7ff; margin-top:6px; font-weight:600}
+
+/* ---------------------------
+   INTRO SCREEN
+   --------------------------- */
+#introScreen{
+  position:fixed; inset:0; z-index:2500;
+  display:flex; align-items:center; justify-content:center;
+  background:#000;
+  pointer-events:none;
+  opacity:1; transition:opacity .8s ease, visibility .8s;
+}
+#introScreen.hidden{opacity:0; visibility:hidden}
+.intro-text span{
+  color:var(--neon); font-weight:800;
+  font-size:clamp(20px,6vw,52px);
+  text-shadow:0 0 22px rgba(0,255,198,0.9);
+  transform:scale(.95); animation:introText 1.8s cubic-bezier(.2,.9,.3,1) forwards;
+}
+@keyframes introText{
+  0%{opacity:0; transform:scale(.7)}
+  40%{opacity:1; transform:scale(1.05)}
+  100%{opacity:1; transform:scale(1)}
+}
+
+/* ---------------------------
+   HEADER / GLITCH TITLE
+   --------------------------- */
+.site-header{
+  position: relative;
+  z-index: 5; /* ensure title is above canvas */
+  padding: 14px 12px 4px;
+}
+.title{
+  text-align:center; margin:0 auto; font-size:clamp(28px,6vw,64px);
+  color:var(--neon);
+  font-weight:900; letter-spacing:0.12em;
+  position:relative;
+  z-index:10;
+  text-transform:uppercase;
+}
+.subtitle{
+  text-align:center; margin-top:6px; color:#9fe7ff; opacity:.9;
+}
+
+/* Glitch effect */
+.glitch{
+  position:relative;
+}
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute; left:0; top:0; width:100%;
+  overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+  text-shadow: none;
+  opacity:.85;
+}
+.glitch::before{
+  transform:translate(-2px, -1px);
+  color:#ff2e63;
+  mix-blend-mode:screen;
+  filter:blur(.6px);
+  animation:glitchTop 2.5s infinite linear alternate-reverse;
+}
+.glitch::after{
+  transform:translate(2px, 1px);
+  color:#7c5cff;
+  mix-blend-mode:screen;
+  filter:blur(.6px);
+  animation:glitchBottom 3s infinite linear alternate-reverse;
+}
+@keyframes glitchTop{
+  0%{clip-path:polygon(0 2%,100% 0,100% 16%,0 20%)}
+  30%{clip-path:polygon(0 18%,100% 12%,100% 30%,0 26%) translateZ(0)}
+  60%{clip-path:polygon(0 36%,100% 36%,100% 56%,0 56%)}
+  100%{clip-path:polygon(0 2%,100% 0,100% 16%,0 20%)}
+}
+@keyframes glitchBottom{
+  0%{clip-path:polygon(0 60%,100% 66%,100% 84%,0 80%)}
+  40%{clip-path:polygon(0 36%,100% 44%,100% 56%,0 56%)}
+  80%{clip-path:polygon(0 18%,100% 12%,100% 30%,0 26%)}
+  100%{clip-path:polygon(0 60%,100% 66%,100% 84%,0 80%)}
+}
+
+/* ---------------------------
+   MUSIC CONTROLS
+   --------------------------- */
+#musicControls{
+  position:fixed; right:14px; top:60px; z-index:2200;
+  display:flex; gap:8px; align-items:center;
+  background:rgba(2,6,12,0.6); padding:8px; border-radius:10px;
+  border:1px solid rgba(0,255,198,0.12);
+}
+#musicToggle{
+  width:40px; height:40px; border-radius:8px; border:none;
+  background:transparent; color:var(--neon);
+  font-weight:700; font-size:18px; cursor:pointer;
+  box-shadow:0 0 12px rgba(0,255,198,0.06);
+}
+#musicVolume{width:90px}
+
+/* ---------------------------
+   WISHES BOX
+   --------------------------- */
+#wishes{
+  position: relative;
+  z-index: 5; /* above canvas */
+  width: min(22em, 90vw);
+  margin: 1.8rem auto 1.4rem;
+  border: 1px solid rgba(0,255,198,0.12);
+  text-align: center;
+  background: rgba(9,16,40,0.92);
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,255,198,0.06);
+}
+
+/* ---------------------------
+   CAROUSEL
+   --------------------------- */
+.slider{
+  position:relative;
+  z-index: 5; /* above canvas */
+  max-width:900px;
+  width:90vw;
+  margin:1.8rem auto 3rem;
+  border-radius:16px;
+  overflow:hidden;
+  background:rgba(3,7,20,0.75);
+  border:1px solid rgba(0,255,198,0.06);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+}
+.slides{display:flex; transition:transform .6s cubic-bezier(.2,.9,.3,1); will-change:transform}
+.card{min-width:100%; display:flex; align-items:center; justify-content:center; padding:18px}
+.card img{
+  width:auto; max-width:100%; max-height:80vh; border-radius:14px;
+  padding:6px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  position:relative; z-index:2;
+  /* animated RGB border using pseudo element */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+.card img::after{content:""} /* placeholder for potential overlay */
+
+.nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:52px; height:52px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.04); background:rgba(2,6,12,0.8);
+  color:var(--neon); font-size:28px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  z-index:30;
+}
+.nav.prev{left:12px} .nav.next{right:12px}
+
+/* RGB border overlay (animated) */
+.card .rgb-wrap{position:relative; display:inline-block; border-radius:16px}
+.card .rgb-border{
+  position:absolute; inset:-6px; z-index:1; border-radius:18px; pointer-events:none;
+  background:linear-gradient(90deg,#ff2e63,#ff9f1c,#7c5cff,#00e5ff,#00ffc6);
+  background-size:200% 100%; filter:blur(8px); opacity:0.9; mix-blend-mode:screen;
+  animation:rgbShift 2.2s linear infinite;
+}
+@keyframes rgbShift{ from{background-position:0%} to{background-position:200%} }
+
+/* Hover intensify */
+.card img:hover{transform:scale(1.03); transition:transform .28s ease}
+
+/* ---------------------------
+   POPUP LIGHTBOX
+   --------------------------- */
+.image-modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:2000}
+.image-modal.is-visible{display:flex}
+.image-modal-backdrop{position:absolute; inset:0; background:radial-gradient(circle at top, rgba(0,0,0,0.9), rgba(0,0,0,0.95))}
+.image-modal-content{
+  position:relative; max-width:min(90vw,980px); max-height:85vh; padding:12px; border-radius:12px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.85), rgba(3,7,20,0.9));
+  box-shadow: 0 0 40px rgba(0,255,198,0.12);
+}
+.image-modal-content img{max-width:100%; max-height:80vh; border-radius:10px}
+.image-modal-close{position:absolute; right:8px; top:6px; background:none; border:none; font-size:28px; color:var(--neon); cursor:pointer}
+
+/* PLEASE CLICK bubble (inside wishes, above lyrics) */
+#pleaseClick{
+  position: relative;
+  margin: 0 0 0.5rem;
+  width: 11.5em;
+  text-align: center;
+  background: rgba(3,7,20,0.88);
+  border: 1px solid rgba(0,255,198,0.12);
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 6;
+  animation: floaty 1s ease-in-out infinite alternate;
+}
+@keyframes floaty{ to{transform:translateY(-6px)} }
+
+/* ---------------------------
+   MOBILE
+   --------------------------- */
+@media (max-width:640px){
+  .loader-box{padding:18px}
+  #musicControls{right:10px; top:10px}
+  .title{font-size:28px}
+  .subtitle{font-size:13px}
+  .card img{max-height:55vh}
+  .nav{width:42px;height:42px;font-size:22px}
+}

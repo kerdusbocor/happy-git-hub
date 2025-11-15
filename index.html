@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>HAPPY BIRTHDAY AMRIS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Game-style preloader -->
+  <div id="preloader">
+    <div class="loader-box">
+      <div class="loader-title">Loading Birthday Level...</div>
+      <div class="loader-bar">
+        <div class="loader-fill" id="loaderFill"></div>
+      </div>
+      <div class="loader-percent" id="loaderPercent">0%</div>
+    </div>
+  </div>
+
+  <!-- Intro Screen -->
+  <div id="introScreen">
+    <div class="intro-text">
+      <span>Wijen Gaming Presents...</span>
+    </div>
+  </div>
+
+  <!-- Background canvas -->
+  <canvas id="canvas"></canvas>
+
+  <!-- Header with glitch title & music controls -->
+  <header class="site-header">
+    <h1 id="mainTitle" class="title glitch" data-text="HAPPY BIRTHDAY AMRIS">HAPPY BIRTHDAY AMRIS</h1>
+    <p class="subtitle">Grow Up, Level Up – Wijen Gaming</p>
+  </header>
+
+  <!-- Background music controls -->
+  <div id="musicControls">
+    <button id="musicToggle" aria-pressed="false" aria-label="Toggle background music">▶</button>
+    <input type="range" id="musicVolume" min="0" max="1" step="0.05" value="0.5" aria-label="Music volume">
+  </div>
+
+  <div id="wishes">
+    <div id="pleaseClick">Please click here<br><span>&#9759;</span></div>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p class="control">
+      <input type="range" id="inputSpeed" min="0.1" max="2" step="0.1" value="0.5">
+    </p>
+  </div>
+
+  <!-- Carousel -->
+  <div class="slider" id="photoSlider">
+    <button class="nav prev">‹</button>
+    <div class="slides">
+      <div class="card"><img src="Image/1.jpg" alt="Photo 1"></div>
+      <div class="card"><img src="Image/2.jpg" alt="Photo 2"></div>
+      <div class="card"><img src="Image/3.jpg" alt="Photo 3"></div>
+      <div class="card"><img src="Image/4.jpg" alt="Photo 4"></div>
+      <div class="card"><img src="Image/5.jpg" alt="Photo 5"></div>
+      <div class="card"><img src="Image/6.jpg" alt="Photo 6"></div>
+      <div class="card"><img src="Image/7.jpg" alt="Photo 7"></div>
+    </div>
+    <button class="nav next">›</button>
+  </div>
+
+  <!-- Image Popup -->
+  <div id="imageModal" class="image-modal">
+    <div class="image-modal-backdrop"></div>
+    <div class="image-modal-content">
+      <button class="image-modal-close">×</button>
+      <img id="modalImage" src="">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
