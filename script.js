@@ -289,7 +289,7 @@
     const notes = [
       {f:262,d:.5,t:"Hap",p:p1},{f:262,d:.5,t:"py ",p:p1},{f:294,d:1,t:"Birth",p:p1},{f:262,d:1,t:"day ",p:p1},{f:349,d:1,t:"To ",p:p1},{f:330,d:2,t:"You",p:p1},
       {f:262,d:.5,t:"Hap",p:p2},{f:262,d:.5,t:"py ",p:p2},{f:294,d:1,t:"Birth",p:p2},{f:262,d:1,t:"day ",p:p2},{f:392,d:1,t:"To ",p:p2},{f:349,d:2,t:"You",p:p2},
-      {f:262,d:.5,t:"Hap",p:p3},{f:262,d:.5,t:"py ",p:p3},{f:523,d:1,t:"Birth",p:p3},{f:440,d:1,t:"day ",p:p3},{f:349,d:1,t:"My ",p:p3},{f:330,d:1,t:"Lo",p:p3},{f:294,d:3,t:"ve",p:p3},
+      {f:262,d:.5,t:"Hap",p:p3},{f:262,d:.5,t:"py ",p:p3},{f:523,d:1,t:"Birth",p:p3},{f:440,d:1,t:"day ",p:p3},{f:349,d:1,t:"To ",p:p3},{f:330,d:3,t:"You",p:p3},
       {f:466,d:.5,t:"Hap",p:p4},{f:466,d:.5,t:"py ",p:p4},{f:440,d:1,t:"Birth",p:p4},{f:349,d:1,t:"day ",p:p4},{f:392,d:1,t:"To ",p:p4},{f:349,d:2,t:"You",p:p4},
     ];
     notes.forEach(n => {
